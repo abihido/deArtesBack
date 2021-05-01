@@ -1,0 +1,1 @@
+CREATE VIEW `usuarios` AS (select * from estudiantes union select * from maestros union select * from padres);
