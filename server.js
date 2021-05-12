@@ -5,7 +5,7 @@ const app = express();
 
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'50mb'}));
 
 app.get("/",(req,res) => {
     res.json({message:"que onda"});

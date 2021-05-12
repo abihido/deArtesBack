@@ -4,6 +4,7 @@ const Maestro = function(maestro){
     this.mail = maestro.mail;
     this.name = maestro.name;
     this.password = maestro.password;
+    this.avatar = maestro.avatar;
 };
 
 Maestro.create = (newMaestro, result) => {
@@ -53,8 +54,8 @@ Maestro.create = (newMaestro, result) => {
   
   Maestro.updateById = (id, maestro, result) => {
     sql.query(
-      "UPDATE maestros SET mail = ?, name = ?, password = ? WHERE idMaestros = ?",
-      [maestro.mail, maestro.name, maestro.password, id],
+      "UPDATE maestros SET mail = ?, name = ?, password = ?, avatar = ? WHERE idMaestros = ?",
+      [maestro.mail, maestro.name, maestro.password,maestro.avatar, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

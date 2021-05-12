@@ -38,7 +38,7 @@ exports.findAll = (req,res) => {
 };
 
 exports.findNames= (req,res)=>{
-    Curso.getNames(req.params.id,(err,data)=>{
+    Curso.getNames(req.params.id,req.params.rol,(err,data)=>{
         if(err){
             res.status(500).send({
                 message:

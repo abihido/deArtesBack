@@ -4,6 +4,8 @@ const Estudiante = function(estudiante){
     this.mail = estudiante.mail;
     this.name = estudiante.name;
     this.password = estudiante.password;
+    this.avatar =estudiante.avatar;
+    
 };
 
 Estudiante.create = (newEstudiante, result) => {
@@ -75,8 +77,8 @@ Estudiante.create = (newEstudiante, result) => {
   
   Estudiante.updateById = (id, estudiante, result) => {
     sql.query(
-      "UPDATE estudiantes SET mail = ?, name = ?, password = ? WHERE idEstudiantes = ?",
-      [estudiante.mail, estudiante.name, estudiante.password, id],
+      "UPDATE estudiantes SET mail = ?, name = ?, password = ?, avatar = ? WHERE idEstudiantes = ?",
+      [estudiante.mail, estudiante.name, estudiante.password, estudiante.avatar, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

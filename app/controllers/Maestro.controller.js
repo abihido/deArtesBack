@@ -10,7 +10,8 @@ exports.create = (req,res) => {
     const MaestroC = new Maestro({
         mail: req.body.mail,
         name: req.body.name,
-        password: req.body.password
+        password: req.body.password,
+        avatar: req.body.avatar
     });
 
     Maestro.create(MaestroC,(err,data) => {

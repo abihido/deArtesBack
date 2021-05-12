@@ -10,7 +10,8 @@ exports.create = (req,res) => {
     const EstudianteC = new Estudiante({
         mail: req.body.mail,
         name: req.body.name,
-        password: req.body.password
+        password: req.body.password,
+        avatar: req.body.avatar
     });
 
     Estudiante.create(EstudianteC,(err,data) => {

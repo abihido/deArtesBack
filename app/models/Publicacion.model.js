@@ -6,6 +6,7 @@ const Publicacion = function(publicacion){
     this.imagen = publicacion.imagen;
     this.link = publicacion.link;
     this.rol = publicacion.rol;
+    this.curso = publicacion.curso;
 };
 
 Publicacion.create = (newPublicacion, result) => {
@@ -17,7 +18,7 @@ Publicacion.create = (newPublicacion, result) => {
       }
   
       console.log("Publicacion creada: ", { id: res.insertId, ...newPublicacion });
-      result(null, { id: res.insertId, ...newPublicacion });
+      //result(null, { id: res.insertId, ...newPublicacion });
     });
   };
   
@@ -39,7 +40,43 @@ Publicacion.create = (newPublicacion, result) => {
       result({ kind: "not_found" }, null);
     });
   };
+  Publicacion.findGlobals = ( result) => {
+    sql.query(`SELECT * FROM publicaciones WHERE rol = 1`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
   
+      if (res.length) {
+       // console.log("Publicacion encontrado ", res);
+        result(null, res);
+        return;
+      }
+  
+      // not found Publicacion with the id
+      result({ kind: "not_found" }, null);
+    });
+  };
+  Publicacion.findByCurso = (curso, result) => {
+    sql.query(`SELECT * FROM publicaciones WHERE curso = ${curso}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+  
+      if (res.length) {
+       // console.log("Publicacion encontrado ", res);
+        result(null, res);
+        return;
+      }
+  
+      // not found Publicacion with the id
+      result({ kind: "not_found" }, null);
+    });
+  };
+
   Publicacion.getAll = result => {
     sql.query("SELECT * FROM publicaciones", (err, res) => {
       if (err) {
@@ -54,8 +91,8 @@ Publicacion.create = (newPublicacion, result) => {
   };
   Publicacion.updateById = (id, publicacion, result) => {
     sql.query(
-      "UPDATE publicaciones SET titulo = ?, descripcion = ?, imagen = ?, link = ?, rol =? WHERE idpublicaciones = ?",
-      [publicacion.titulo, publicacion.descripcion, publicacion.imagen,publicacion.link,publicacion.rol, id],
+      "UPDATE publicaciones SET titulo = ?, descripcion = ?, imagen = ?, link = ?, rol =?,curso =? WHERE idpublicaciones = ?",
+      [publicacion.titulo, publicacion.descripcion, publicacion.imagen,publicacion.link,publicacion.rol,publicacion.curso, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

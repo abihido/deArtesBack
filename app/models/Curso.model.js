@@ -51,7 +51,8 @@ Curso.create = (newCurso, result) => {
       result(null, res);
     });
   };
-  Curso.getNames = (id,result)=>{
+  Curso.getNames = (id,rol,result)=>{
+    if(rol==0){
     sql.query(`SELECT idCurso,name from cursos where idCurso in (select idCurso from matriculas where idEstudiante=${id});`,(err,res) =>{
       if(err){
         console.log("error",err);
@@ -61,7 +62,19 @@ Curso.create = (newCurso, result) => {
       console.log("nombres",res);
       result(null,res);
      
-    })
+    })}
+    else{
+      sql.query(`SELECT idCurso,name from cursos where master=${id};`,(err,res) =>{
+        if(err){
+          console.log("error",err);
+          result(err,null);
+          return;
+        }
+        console.log("nombres",res);
+        result(null,res);
+       
+      })
+    }
   };
   Curso.updateById = (id, curso, result) => {
     sql.query(

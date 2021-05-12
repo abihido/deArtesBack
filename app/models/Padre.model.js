@@ -4,6 +4,7 @@ const Padre = function(padre){
     this.mail = padre.mail;
     this.name = padre.name;
     this.password = padre.password;
+    this.avatar = padre.avatar;
     this.idEstudiante = padre.idEstudiante;
 };
 
@@ -54,8 +55,8 @@ Padre.create = (newPadre, result) => {
   
   Padre.updateById = (id, padre, result) => {
     sql.query(
-      "UPDATE padres SET mail = ?, name = ?, password = ? WHERE idPadres = ?",
-      [padre.mail, padre.name, padre.password, id],
+      "UPDATE padres SET mail = ?, name = ?, password = ?,avatar=? WHERE idPadres = ?",
+      [padre.mail, padre.name, padre.password, padre.avatar , id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

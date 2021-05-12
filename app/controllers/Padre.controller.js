@@ -11,6 +11,7 @@ exports.create = (req,res) => {
         mail: req.body.mail,
         name: req.body.name,
         password: req.body.password,
+        avatar: req.body.avatar,
         idEstudiante: req.body.idEstudiante
     });
 

@@ -5,7 +5,7 @@ module.exports = app =>{
 
     app.get("/cursos",curso.findAll);
     
-    app.get("/cursos/nombres/:id",curso.findNames);
+    app.get("/cursos/nombres/:id/:rol",curso.findNames);
 
     app.get("/cursos/:cursoId",curso.findOne);
 

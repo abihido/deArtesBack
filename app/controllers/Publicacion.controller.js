@@ -12,9 +12,9 @@ exports.create = (req,res) => {
         descripcion : req.body.descripcion,
         imagen : req.body.imagen,
         link : req.body.link,
-        rol : req.body.rol
+        rol : req.body.rol,
+        curso: req.body.curso
     });
-    
     Publicacion.create(PublicacionC,(err,data) => {
         if(err){
             res.status(500).send({
@@ -54,7 +54,38 @@ exports.findOne = (req,res) => {
         } else res.send(data);
     });
 };
-
+exports.findByCurso = (req,res)=>{
+    Publicacion.findByCurso(req.params.curso, (err, data) => {
+        if(err){
+            if(err.kind === "not_found"){
+                res.status(404).send({
+                    message: `No se encontro la publicacion del curso ${req.params.curso}` 
+                });
+            }
+            else {
+                res.status(500).send({
+                    message: "error con la publicacion del curso"+req.params.curso
+                });
+            }
+        } else res.send(data);
+    });    
+};
+exports.findGlobal = (req,res)=>{
+    Publicacion.findGlobals( (err, data) => {
+        if(err){
+            if(err.kind === "not_found"){
+                res.status(404).send({
+                    message: `No se encontro la publicacion global` 
+                });
+            }
+            else {
+                res.status(500).send({
+                    message: "error con la publicacion global"
+                });
+            }
+        } else res.send(data);
+    });    
+};
 exports.update = (req,res) => {
     if(!req.body){
         res.status(400).send({

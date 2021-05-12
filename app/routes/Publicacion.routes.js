@@ -5,7 +5,11 @@ module.exports = app =>{
 
     app.get("/publicaciones",publicacion.findAll);
 
-    app.get("/publicaciones/:publicacionId",publicacion.findOne);
+    app.get("/publicaciones/one/:publicacionId",publicacion.findOne);
+
+    app.get("/publicaciones/cursos/:curso",publicacion.findByCurso);
+
+    app.get("/publicaciones/cursos",publicacion.findGlobal);
 
     app.put("/publicaciones/:publicacionId",publicacion.update);
 
