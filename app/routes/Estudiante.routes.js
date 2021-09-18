@@ -7,6 +7,8 @@ module.exports = app =>{
 
     app.get("/estudiantes",estudiante.findAll);
 
+    app.get("/estudiantes/curso/:curso",estudiante.findByCurso);
+
     app.get("/estudiantes/:estudianteId",estudiante.findOne);
 
     app.put("/estudiantes/:estudianteId",estudiante.update);

@@ -5,6 +5,14 @@ const Maestro = function(maestro){
     this.name = maestro.name;
     this.password = maestro.password;
     this.avatar = maestro.avatar;
+    this.fecha= maestro.fecha;
+    this.edad= maestro.edad,
+    this.documento= maestro.documento,
+    this.celular= maestro.celular,
+    this.telefono= maestro.telefono,
+    this.direccion= maestro.direccion,
+    this.barrio= maestro.barrio,
+    this.ciudad= maestro.ciudad
 };
 
 Maestro.create = (newMaestro, result) => {
@@ -54,8 +62,8 @@ Maestro.create = (newMaestro, result) => {
   
   Maestro.updateById = (id, maestro, result) => {
     sql.query(
-      "UPDATE maestros SET mail = ?, name = ?, password = ?, avatar = ? WHERE idMaestros = ?",
-      [maestro.mail, maestro.name, maestro.password,maestro.avatar, id],
+      "UPDATE maestros SET mail = ?, name = ?, password = ?, avatar = ? edad= ?, documento=? ,celular=?, telefono=?, direccion=?,barrio=?,ciudad=? WHERE idMaestros = ?",
+      [maestro.mail, maestro.name, maestro.password,maestro.avatar,maestro.edad,maestro.documento,maestro.celular,maestro.telefono,maestro.direccion,maestro.barrio,this.ciudad= maestro.ciudad, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

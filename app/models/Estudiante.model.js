@@ -5,6 +5,14 @@ const Estudiante = function(estudiante){
     this.name = estudiante.name;
     this.password = estudiante.password;
     this.avatar =estudiante.avatar;
+    this.fecha= estudiante.fecha;
+    this.edad= estudiante.edad,
+    this.documento= estudiante.documento,
+    this.celular= estudiante.celular,
+    this.telefono= estudiante.telefono,
+    this.direccion= estudiante.direccion,
+    this.barrio= estudiante.barrio,
+    this.ciudad= estudiante.ciudad
     
 };
 
@@ -74,18 +82,30 @@ Estudiante.create = (newEstudiante, result) => {
       result(null, res);
     });
   };
+
+  Estudiante.getByCurso = (id,result) => {
+    sql.query(`select * from estudiantes where idEstudiantes IN (select idEstudiante from matriculas where idCurso =${id})`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+  
+      console.log("estudiantes: ", res);
+      result(null, res);
+    });
+  }; 
   
   Estudiante.updateById = (id, estudiante, result) => {
     sql.query(
-      "UPDATE estudiantes SET mail = ?, name = ?, password = ?, avatar = ? WHERE idEstudiantes = ?",
-      [estudiante.mail, estudiante.name, estudiante.password, estudiante.avatar, id],
+      "UPDATE estudiantes SET mail = ?, name = ?, password = ?, avatar = ?, edad= ?, documento=? ,celular=?, telefono=?, direccion=?,barrio=?,ciudad=? WHERE idEstudiantes = ?",
+      [estudiante.mail, estudiante.name, estudiante.password, estudiante.avatar,estudiante.edad,estudiante.documento,estudiante.celular,estudiante.telefono,estudiante.direccion,estudiante.barrio,this.ciudad= estudiante.ciudad, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
           return;
         }
-  
         if (res.affectedRows == 0) {
           // not found Estudiante with the id
           result({ kind: "not_found por id" }, null);

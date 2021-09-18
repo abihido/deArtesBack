@@ -6,6 +6,11 @@ const Padre = function(padre){
     this.password = padre.password;
     this.avatar = padre.avatar;
     this.idEstudiante = padre.idEstudiante;
+
+    this.documento=padre.documento;
+    this.parentesco= padre.parentesco;
+    this.celular= padre.celular;
+    this.telefono= padre.telefono;
 };
 
 Padre.create = (newPadre, result) => {
@@ -55,15 +60,15 @@ Padre.create = (newPadre, result) => {
   
   Padre.updateById = (id, padre, result) => {
     sql.query(
-      "UPDATE padres SET mail = ?, name = ?, password = ?,avatar=? WHERE idPadres = ?",
-      [padre.mail, padre.name, padre.password, padre.avatar , id],
+      "UPDATE padres SET mail = ?, name = ?, password = ?,avatar=?,documento=?,parentesco=?,celular=?,telefono=? WHERE idPadres = ?",
+      [padre.mail, padre.name, padre.password, padre.avatar,padre.documento,padre.parentesco,padre.celular,padre.telefono , id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(null, err);
           return;
         }
-  
+
         if (res.affectedRows == 0) {
           // not found Padre with the id
           result({ kind: "not_found por id" }, null);

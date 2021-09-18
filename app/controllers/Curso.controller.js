@@ -11,7 +11,9 @@ exports.create = (req,res) => {
         master: req.body.master,
         name: req.body.name,
         semestre: req.body.semestre,
-        active: req.body.active
+        active: req.body.active,
+        avatar: req.body.avatar,
+        description: req.body.description
     });
 
     Curso.create(CursoC,(err,data) => {

@@ -4,7 +4,9 @@ const Curso = function(curso){
     this.master = curso.master;
     this.name = curso.name;
     this.semestre = curso.semestre;
+    this.description = curso.description;
     this.active = curso.active;
+    this.avatar = curso.avatar;
 };
 
 Curso.create = (newCurso, result) => {
@@ -78,8 +80,8 @@ Curso.create = (newCurso, result) => {
   };
   Curso.updateById = (id, curso, result) => {
     sql.query(
-      "UPDATE cursos SET master = ?, name = ?, semestre = ?, active = ? WHERE idCurso = ?",
-      [curso.master, curso.name, curso.semestre,curso.active, id],
+      "UPDATE cursos SET master = ?, name = ?, semestre = ?, active = ?, avatar= ?, description=? WHERE idCurso = ?",
+      [curso.master, curso.name, curso.semestre,curso.active,curso.avatar,curso.description, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

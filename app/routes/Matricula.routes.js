@@ -11,5 +11,6 @@ module.exports = app =>{
 
     app.delete("/matriculas/:matriculaId",matricula.delete);
 
-    app.delete("/matriculas",matricula.deleteAll);
+    app.delete("/matriculas/:estudianteId/:cursoId",matricula.deleteByStudent);
+
 }

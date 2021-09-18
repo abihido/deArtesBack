@@ -20,7 +20,7 @@ Matricula.create = (newMatricula, result) => {
   };
   
   Matricula.findById = (matriculaId, result) => {
-    sql.query(`SELECT * FROM matriculas WHERE idMatriculas = ${matriculaId}`, (err, res) => {
+    sql.query(`DELETE FROM matriculas WHERE idMatriculas = ${matriculaId}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -37,7 +37,25 @@ Matricula.create = (newMatricula, result) => {
       result({ kind: "not_found" }, null);
     });
   };
+  Matricula.deleteByStudent = (estudianteId,cursoId, result) => {
+    sql.query(`DELETE  FROM matriculas WHERE idEstudiante = ${estudianteId} and idCurso = ${cursoId}`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
   
+      if (res.affectedRows == 0) {
+        // not found Matricula with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+  
+      console.log("El matricula fue borrado");
+      result(null, res);
+    });
+  };
+
   Matricula.getAll = result => {
     sql.query("SELECT * FROM matriculas", (err, res) => {
       if (err) {

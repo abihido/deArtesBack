@@ -1,4 +1,6 @@
 const Estudiante = require("../models/Estudiante.model.js");
+const date= require('moment');
+
 
 exports.create = (req,res) => {
     if(!req.body){
@@ -6,12 +8,21 @@ exports.create = (req,res) => {
             message: "No puede estar vacio"
         });
     }
+    const dateE = date().format("YYYY-MM-DD");
 
     const EstudianteC = new Estudiante({
         mail: req.body.mail,
         name: req.body.name,
         password: req.body.password,
-        avatar: req.body.avatar
+        avatar: req.body.avatar,
+        fecha: dateE,
+        edad: req.body.edad,
+        documento: req.body.documento,
+        celular: req.body.celular,
+        telefono: req.body.telefono,
+        direccion: req.body.direccion,
+        barrio: req.body.barrio,
+        ciudad: req.body.ciudad
     });
 
     Estudiante.create(EstudianteC,(err,data) => {
@@ -36,6 +47,19 @@ exports.findAll = (req,res) => {
         else res.send(data);
     })
 };
+
+exports.findByCurso = (req,res) => {
+    Estudiante.getByCurso(req.params.curso,(err,data) =>{
+        if(err){
+            res.status(500).send({
+                message:
+                err.message || "Algo no sirvio"
+            });
+        }
+        else res.send(data);
+    })
+};
+
 exports.confirm=(req,res) => {
     if(!req.body){
         res.status(400).send({

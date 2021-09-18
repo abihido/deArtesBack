@@ -53,6 +53,24 @@ exports.findOne = (req,res) => {
     });
 };
 
+exports.deleteByStudent = (req,res) => {
+
+    Matricula.deleteByStudent(req.params.estudianteId,req.params.cursoId , (err, data) => {
+        if(err){
+            if(err.kind === "not_found"){
+                res.status(404).send({
+                    message: `No se encontro el matricula con id ${req.params.estudianteId}` 
+                });
+            }
+            else {
+                res.status(500).send({
+                    message: "error con el usuario "+req.params.estudianteId
+                });
+            }
+        } else res.send(data);
+    });
+}
+
 exports.update = (req,res) => {
     if(!req.body){
         res.status(400).send({

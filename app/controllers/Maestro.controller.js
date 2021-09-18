@@ -1,17 +1,25 @@
 const Maestro = require("../models/Maestro.model.js");
-
+const date= require('moment');
 exports.create = (req,res) => {
     if(!req.body){
         res.status(400).send({
             message: "No puede estar vacio"
         });
     }
-
+    const dateE = date().format("YYYY-MM-DD");
     const MaestroC = new Maestro({
         mail: req.body.mail,
         name: req.body.name,
         password: req.body.password,
-        avatar: req.body.avatar
+        avatar: req.body.avatar,
+        fecha: dateE,
+        edad: req.body.edad,
+        documento: req.body.documento,
+        celular: req.body.celular,
+        telefono: req.body.telefono,
+        direccion: req.body.direccion,
+        barrio: req.body.barrio,
+        ciudad: req.body.ciudad
     });
 
     Maestro.create(MaestroC,(err,data) => {

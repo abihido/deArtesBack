@@ -12,7 +12,13 @@ exports.create = (req,res) => {
         name: req.body.name,
         password: req.body.password,
         avatar: req.body.avatar,
-        idEstudiante: req.body.idEstudiante
+        idEstudiante: req.body.idEstudiante,
+        
+        documento :req.body.documento,
+        parentesco: req.body.parentesco,
+        celular: req.body.celular,
+        telefono: req.body.telefono,
+
     });
 
     Padre.create(PadreC,(err,data) => {

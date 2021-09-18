@@ -31,7 +31,7 @@ Publicacion.create = (newPublicacion, result) => {
       }
   
       if (res.length) {
-        console.log("Publicacion encontrado ", res[0]);
+       // console.log("Publicacion encontrado ", res[0]);
         result(null, res[0]);
         return;
       }
